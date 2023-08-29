@@ -1,6 +1,6 @@
 CFLAGS = -Wall -Werror -Wextra
 
-NAME = Bsq
+NAME = bsq
 
 SCR =              //NAME OF FILE TO COMPILE
 
