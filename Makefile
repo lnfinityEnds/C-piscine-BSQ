@@ -1,13 +1,29 @@
-CFLAGS = -Wall -Werror -Wextra
+NAME = Bsq
 
-NAME = bsq
+SRC = 
 
-SCR =              //NAME OF FILE TO COMPILE
+CC = gcc
 
-$(NAME):
-	cc $(CFLAGS) $(SCR) -o $(NAME)
+OBJ = ${SRC:.c=.o}
 
-clean:
+CFLAGS = -Wall -Wextra -Werror
 
-fclean: clean
-	rm $(NAME)
+OUTPUT = bsq
+
+all : ${SRC} ${NAME}
+	
+%.o: %.c
+	$(CC) $(CFLAGS) $< -o $@
+
+${NAME} : ${OBJ}
+        ${CC} ${CFLAGS} -o $@
+
+clean :
+	rm -f ${NAME}
+
+fclean : clean
+	rm -f ${OBJ}
+
+re : fclean all
+
+.PHONY : all clean fclean re
