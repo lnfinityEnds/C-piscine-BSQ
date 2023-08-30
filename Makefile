@@ -1,6 +1,6 @@
 NAME = Bsq
 
-SRC = 
+SRC = check_map.c find.c ft_print_map.c ft_read_file.c
 
 CC = gcc
 
