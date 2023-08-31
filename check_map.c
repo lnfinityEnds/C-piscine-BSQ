@@ -25,8 +25,10 @@ int	*ft_atoi_index(char *str)
 	number = str;
 	if(*str >= '0' && *str <= '9')
 		*atr = comberzor(*str);
-	
 
-
-   return (0);
+   return (atr);
+}
+int main(void)
+{
+	int *a = ft_atoi_index("123");
 }
