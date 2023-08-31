@@ -11,13 +11,13 @@ int    min_value(int a, int b, int c)
 
 int find_square(char **map, char *empty, char *obs, char *full)
 {
-    int **map = //funcion que genera el mapa
+    int **map = //funcion que genera el map
     int max_square = 0;
     int **matrix_aux;
     int i;
     int j;
     int row;
-    int colum;      //generar matriz para filas y columnas
+    int colum;      //generar matriz para filas y colum
     
     i = 0;
     while (i < row) 

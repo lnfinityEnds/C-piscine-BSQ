@@ -8,7 +8,6 @@ OBJ = ${SRC:.c=.o}
 
 CFLAGS = -Wall -Wextra -Werror
 
-OUTPUT = bsq
 
 all : ${SRC} ${NAME}
 	

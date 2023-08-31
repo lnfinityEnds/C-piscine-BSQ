@@ -2,7 +2,7 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: gcc compilar archivo activo",
+            "label": "C/C++: gcc compilar filetest activo",
             "command": "/usr/bin/gcc",
             "args": [
                 "-fdiagnostics-color=always",

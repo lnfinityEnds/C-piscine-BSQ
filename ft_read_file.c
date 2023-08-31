@@ -11,122 +11,122 @@
 /* ************************************************************************** */
 #include <stdio.h>
 
-int	ft_tam_archivo(char *file_name)
+int	ft_tam_filetest(char *file_name)
 {
 	int		tam;
-	char	almacen;
-	FILE	*archivo;
+	char	matrix;
+	FILE	*filetest;
 
 	tam = 0;
-	archivo = open(file_name, "r");
-	while (read(archivo, &almacen, 1))
+	filetest = open(file_name, "r");
+	while (read(filetest, &matrix, 1))
 	{
 		tam++;
 	}
-	close(archivo);
+	close(filetest);
 	return (tam);
 }
 
-int	ft_lineas_mapa(char *file_name)
+int	ft_rows_map(char *file_name)
 {
 	int		cont;
-	char	*almacen;
-	int		n_lineas;
-	FILE	*archivo;
+	char	*matrix;
+	int		n_rows;
+	FILE	*filetest;
 
 	cont = 0;
-	n_linea = 0;
-	archivo = open(file_name, "r");
-	almacen = (char *) malloc(40 * sizeof(char));
-	if (almacen == NULL)
+	n_rows = 0;
+	filetest = open(file_name, "r");
+	matrix = (char *) malloc(40 * sizeof(char));
+	if (matrix == NULL)
 		return (0);
-	while (read(archivo, &almacen[cont], 1))
+	while (read(filetest, &matrix[cont], 1))
 	{
-		if (almacen[cont] > 58 || almacen[cont] < 47)
+		if (matrix[cont] > 58 || matrix[cont] < 47)
 			break ;
-		n_lineas = n_lineas * 10 + (almacen[cont] - 48);
+		n_rows = n_rows * 10 + (matrix[cont] - 48);
 	}
-	free(almacen);
-	close(archivo);
-	return (n_lineas);
+	free(matrix);
+	close(filetest);
+	return (n_rows);
 }
 
-void	ft_saltar_linea(FILE *archivo)
+void	ft_saltar_rows(FILE *filetest)
 {
 	int		cont;
-	char	*almacen;
+	char	*matrix;
 
 	cont = 0;
-	almacen = malloc(4096 * sizeof(char));
-	if (almacen == NULL)
+	matrix = malloc(4096 * sizeof(char));
+	if (matrix == NULL)
 		return (NULL);
-	while (read(archivo, &almacen[cont], 1))
+	while (read(filetest, &matrix[cont], 1))
 	{
-		if (almacen[cont] == '\n')
+		if (matrix[cont] == '\n')
 			break ;
 		cont++;
 	}
 }
 
-int	ft_columnas_mapa(char *file_name)
+int	ft_colum_map(char *file_name)
 {
-	int		tam_archivo;
-	FILE	*archivo;
-	char	*linea;
-	char	*almacen;
-	int		n_columnas;
+	int		tam_filetest;
+	FILE	*filetest;
+	char	*rows;
+	char	*matrix;
+	int		n_colum;
 
-	tam_archivo = ft_tam_archivo(file_name);
-	archivo = fopen(file_name, "r");
-	ft_saltar_linea(archivo);
-	almacen = (char *) malloc(tam_archivo * sizeof(char));
-	if (almacen == NULL)
+	tam_filetest = ft_tam_filetest(file_name);
+	filetest = fopen(file_name, "r");
+	ft_saltar_rows(filetest);
+	matrix = (char *) malloc(tam_filetest * sizeof(char));
+	if (matrix == NULL)
 		return (0);
-	n_columnas = 0;
-	while (read(archivo, &almacen[n_columnas], 1))
+	n_colum = 0;
+	while (read(filetest, &matrix[n_colum], 1))
 	{
-		if (almacen[n_columnas] == '\n')
+		if (matrix[n_colum] == '\n')
 			break ;
-		n_columnas++;
+		n_colum++;
 	}
-	free(almacen);
-	close(archivo);
-	return (n_columnas + 1);
+	free(matrix);
+	close(filetest);
+	return (n_colum + 1);
 }
 
 char	**ft_read_file(char *file_name)
 {
-	FILE	*archivo;
-	int		lineas;
-	int		columnas;
-	char	**almacen;
+	FILE	*filetest;
+	int		rows;
+	int		colum;
+	char	**matrix;
 	int		cont;
 
-	archivo = fopen(file_name, "r");
-	if (archivo == NULL)
+	filetest = fopen(file_name, "r");
+	if (filetest == NULL)
 		return (NULL);
-	columnas = ft_columnas_mapa(file_name);
-	lineas = ft_lineas_mapa(file_name);
-	ft_saltar_linea(archivo);
-	almacen = (char *) malloc(lineas * sizeof(char *));
-	if (almacen == NULL)
+	colum = ft_colum_map(file_name);
+	rows = ft_rows_map(file_name);
+	ft_saltar_rows(filetest);
+	matrix = (char *) malloc(rows * sizeof(char *));
+	if (matrix == NULL)
 		return (NULL);
 	cont = 0;
-	while (cont < lineas)
+	while (cont < rows)
 	{
-		almacen[cont] = malloc(columnas * sizeof(char));
-		if (almacen[cont] == NULL)
+		matrix[cont] = malloc(colum * sizeof(char));
+		if (matrix[cont] == NULL)
 			return (NULL);
 		cont++;
 	}	
 	cont = 0;
-	while (cont < lineas)
+	while (cont < rows)
 	{
-		if ((read(archivo, almacen[cont], columnas) == -1))
+		if ((read(filetest, matrix[cont], colum) == -1))
 			return (NULL);
-		almacen[cont][columnas -1] = '\0';
+		matrix[cont][colum -1] = '\0';
 		cont++;
 	}
-	close(archivo);
-	return (almacen);
+	close(filetest);
+	return (matrix);
 }
